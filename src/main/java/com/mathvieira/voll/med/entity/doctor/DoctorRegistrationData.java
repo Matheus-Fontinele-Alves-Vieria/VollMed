@@ -1,9 +1,10 @@
-package com.mathvieira.voll.med.doctor;
+package com.mathvieira.voll.med.entity.doctor;
 
-import com.mathvieira.voll.med.address.AddressData;
+import com.mathvieira.voll.med.entity.address.AddressData;
 
 public record DoctorRegistrationData(String name, 
-                                     String email, 
+                                     String email,
+                                     String telephone, 
                                      String crm, 
                                      Specialism specialism, 
                                      AddressData addressData) {}

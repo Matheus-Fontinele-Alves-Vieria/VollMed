@@ -1,4 +1,4 @@
-package com.mathvieira.voll.med.doctor;
+package com.mathvieira.voll.med.entity.doctor;
 
 public enum Specialism {
     CARDIOLOGIA,

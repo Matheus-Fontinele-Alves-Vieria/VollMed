@@ -1,4 +1,4 @@
-package com.mathvieira.voll.med.address;
+package com.mathvieira.voll.med.entity.address;
 
 public record AddressData(String publicSpace, 
                           String neighborhood, 
