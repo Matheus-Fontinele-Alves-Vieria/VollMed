@@ -1,27 +1,27 @@
 package com.mathvieira.voll.med.controller;
 
-import java.util.List;
+import com.mathvieira.voll.med.entity.doctor.DoctorRegistrationData;
+import com.mathvieira.voll.med.repository.DoctorRepository;
+import com.mathvieira.voll.med.entity.doctor.Doctor;
 
-import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
-
-import com.mathvieira.voll.med.doctor.DoctorRegistrationData;
+import jakarta.transaction.Transactional;
+import jakarta.validation.Valid;
 
 
 @RestController
-@RequestMapping("/doctor")
+@RequestMapping("/doctors")
 public class DoctorController {
-    @PostMapping("/register")
-    public void register(@RequestBody DoctorRegistrationData data) {
-        System.out.println(data);
-    }
+    @Autowired
+    private DoctorRepository doctorRepository;
 
-    @GetMapping("/alldoctors")
-    public List<DoctorRegistrationData> getAllDoctors(@RequestParam String param) {
-        return List.of();
-    }  
+    @PostMapping("/register")
+    @Transactional
+    public void register(@RequestBody @Valid DoctorRegistrationData data) {
+        doctorRepository.save(new Doctor(data));
+    }
 }
