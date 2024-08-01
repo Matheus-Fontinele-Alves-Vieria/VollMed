@@ -28,4 +28,6 @@ public record DoctorRegistrationData(
     
     @NotNull
     @Valid
-    AddressData addressData) {}
+    AddressData addressData,
+    
+    String password) {}
