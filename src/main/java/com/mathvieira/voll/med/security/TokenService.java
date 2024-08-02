@@ -15,7 +15,7 @@ import com.mathvieira.voll.med.entity.doctor.Doctor;
 
 @Service
 public class TokenService {
-    @Value("${api.security.token.security}")
+    @Value("${api.security.token.secret}")
     private String secret;
 
     public String generateToken(Doctor doctor) {
