@@ -19,6 +19,8 @@ import com.mathvieira.voll.med.entity.doctor.Doctor;
 import com.mathvieira.voll.med.entity.doctor.DoctorAuthenticationData;
 import com.mathvieira.voll.med.entity.doctor.DoctorRegistrationData;
 import com.mathvieira.voll.med.repository.DoctorRepository;
+import com.mathvieira.voll.med.security.TokenService;
+import com.mathvieira.voll.med.entity.doctor.LoginResponseData;
 
 import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
@@ -32,6 +34,9 @@ public class DoctorController {
 
     @Autowired
     private AuthenticationManager authenticationManager;
+
+    @Autowired
+    private TokenService tokenService;
 
     @PostMapping("/register")
     @Transactional
@@ -55,7 +60,8 @@ public class DoctorController {
     public ResponseEntity login(@RequestBody @Valid DoctorAuthenticationData data) {
         var usernamePassword = new UsernamePasswordAuthenticationToken(data.email(), data.password());
         var auth = this.authenticationManager.authenticate(usernamePassword);
+        var token = tokenService.generateToken((Doctor) auth.getPrincipal());
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(new LoginResponseData(token));
     }   
 }
